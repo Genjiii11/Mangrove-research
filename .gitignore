@@ -2,6 +2,7 @@ __pycache__/
 .ruff_cache/
 .sisyphus/
 .vscode/
+.zenodo_upload/
 *.pyc
 
 # Large data and generated outputs are archived on Zenodo.
@@ -41,6 +42,7 @@ Plot/
 *.7z
 
 !DATA_MANIFEST.csv
+!ZENODO_UPLOAD_MANIFEST.csv
 
 # Local working notes and manuscript drafts.
 AGENTS.md
