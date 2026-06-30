@@ -12,7 +12,7 @@
 
 原始数据和中间表格包括土地利用、红树林掩膜、人口、夜间灯光、植被指数、保护地和生态系统服务价值相关表格。海岸线 shapefile 不随本归档发布。
 
-Zenodo 草稿链接：https://zenodo.org/deposit/21064003
+Zenodo 链接：https://zenodo.org/records/21064003
 
 ## 复现
 
