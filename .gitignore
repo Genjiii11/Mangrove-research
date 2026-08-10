@@ -3,6 +3,7 @@ __pycache__/
 .sisyphus/
 .vscode/
 .zenodo_upload/
+.ipynb_checkpoints/
 *.pyc
 
 # Large data and generated outputs are archived on Zenodo.
@@ -15,6 +16,10 @@ NTL_clipped/
 POP/
 VI/
 Plot/
+data/
+figures/
+models/
+outputs/
 
 *.csv
 *.xlsx
@@ -36,6 +41,17 @@ Plot/
 *.jpeg
 *.docx
 *.joblib
+*.pkl
+*.pickle
+*.parquet
+*.feather
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.nc
+*.grd
+*.asc
 *.zip
 *.tar
 *.tar.gz

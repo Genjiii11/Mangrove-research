@@ -56,73 +56,44 @@ Protected-area benchmarking     Ecosystem service valuation
             Publication-ready synthesis
 ```
 
-## Core code
+## Code organization
 
-The essential scripts are grouped below by analytical stage. Jupyter notebooks provide transparent exploratory and intermediate workflows, while the Python scripts support repeatable production runs.
+Production scripts are organized by analytical responsibility. Jupyter notebooks are stored separately as source-only research records with generated outputs removed.
 
-### 1. Mapping and spatial data engineering
+| Directory | Scope | Representative scripts |
+|---|---|---|
+| `src/mapping/` | Earth Engine classification, grids, raster overlay, and variable extraction | `RF_opt.py`, `create_hex_grid.py`, `overlay_mangrove_lulc.py` |
+| `src/condition/` | MHI construction, temporal slopes, spatial interpolation, and imputation | `calculate_mhi.py`, `calculate_slopes.py`, `kriging_interpolation.py` |
+| `src/spatial_modeling/` | Spatial dependence, MGWR, geographic random forest, and SHAP interpretation | `global_moran_analysis.py`, `mgwr_multiyear.py`, `PyGRF.py`, `rf_shap_regression.py` |
+| `src/benchmarking/` | Protected-area analysis and global country comparison | `global_country_gee_export.py`, `gba_mhi_pa_analysis.py` |
+| `src/valuation/` | Annual and transition-based ecosystem service valuation | `calculate_yearly_esv.py`, `calculate_transition_esv.py` |
+| `src/visualization/` | Publication figures, maps, time series, and Sankey diagrams | `plot_esv_time_series.py`, `plot_global_gba_panels.py`, `create_sankey_diagrams.py` |
 
-| Script | Purpose |
-|---|---|
-| `RF_opt.py` | Builds the multi-source predictor stack, trains and evaluates the Earth Engine random forest, and exports annual mangrove products |
-| `create_hex_grid.py` | Creates the regular hexagonal analysis grid |
-| `extract_population_data.py` | Extracts multi-year population summaries to the spatial grid |
-| `overlay_mangrove_lulc.py` | Integrates mangrove masks, land cover, and raster MHI products |
-| `impute_data.py` | Performs multivariate random-forest imputation |
-| `kriging_interpolation.py` | Interpolates spatially incomplete environmental variables |
-
-### 2. Mangrove condition and spatiotemporal analysis
-
-| Script | Purpose |
-|---|---|
-| `calculate_mhi.py` | Calculates the PCA-based Mangrove Health Index |
-| `calculate_slopes.py` | Estimates Mann–Kendall trends and Theil–Sen slopes |
-| `global_moran_analysis.py` | Quantifies annual global spatial autocorrelation |
-| `lisa_analysis.py` | Maps bivariate local spatial clusters and outliers |
-| `mgwr_multiyear.py` | Assesses spatially varying relationships across focal years |
-| `PyGRF.py` | Implements geographically weighted random forest modelling |
-| `rf_shap_regression.py` | Fits random forest regression and produces SHAP-based interpretation |
-| `SHAPInteraction.py` | Evaluates nonlinear feature interactions |
-
-### 3. Protected areas and global benchmarking
-
-| Script | Purpose |
-|---|---|
-| `global_country_gee_export.py` | Exports country-level mangrove extent and protection statistics from Earth Engine |
-| `local_gba_selected_country_analysis.py` | Integrates global country statistics with local GBA condition and protection results |
-| `gba_mhi_pa_analysis.py` | Compares hex-level MHI change inside and outside protected areas |
-| `global_mangrove_country_stats.py` | Produces global country summaries of mangrove area and protected coverage |
-| `plot_global_gba_panels.py` | Creates the global-to-local benchmark figure |
-
-### 4. Ecosystem service valuation and figures
-
-| Script | Purpose |
-|---|---|
-| `calculate_yearly_esv.py` | Calculates annual class area and condition-adjusted ecosystem service value |
-| `calculate_transition_esv.py` | Attributes ESV change to land transitions and MHI change |
-| `create_sankey_diagrams.py` | Visualizes health and land-use transitions |
-| `plot_esv_time_series.py` | Produces the mangrove ESV time-series figure |
-| `plot_mangrove_service_composition.py` | Visualizes the composition of mangrove ecosystem services |
-| `plot_transition_esv_figure.py` | Plots transition area and transition-induced ESV change |
-| `plot_four_region_mangrove_change_google.py` | Generates comparative multi-region mangrove maps |
+Notebook groups mirror the same research stages under `notebooks/condition/`, `notebooks/mapping/`, `notebooks/spatial_modeling/`, and `notebooks/visualization/`.
 
 ## Repository contents
 
 ```text
 .
-├── *.py                         # Reusable analysis and visualization scripts
-├── *.ipynb                      # Documented exploratory and intermediate workflows
-├── DATA_MANIFEST.csv            # Complete local research-data inventory
-├── ZENODO_UPLOAD_MANIFEST.csv   # Files selected for the archived data release
+├── src/
+│   ├── mapping/                 # Mapping and spatial data engineering
+│   ├── condition/               # MHI and environmental preprocessing
+│   ├── spatial_modeling/        # Spatial statistics and interpretable modelling
+│   ├── benchmarking/            # Protected-area and global comparisons
+│   ├── valuation/               # Ecosystem service calculations
+│   └── visualization/           # Scientific figures and maps
+├── notebooks/                   # Output-free research notebooks by stage
+├── DATA_MANIFEST.csv            # Local research-data inventory metadata
+├── ZENODO_UPLOAD_MANIFEST.csv   # Archived-data release manifest
 ├── requirements.txt             # Python dependencies
 └── README.md                    # Project overview and reproducibility guide
 ```
 
-Large rasters, vector datasets, model objects, tabular intermediates, and generated figures are distributed through the associated Zenodo record rather than GitHub.
+No research datasets, model binaries, generated figures, or derived outputs are tracked in GitHub. The repository contains code, dependency metadata, and data manifests only.
 
 ## Data
 
-Download the research archive from [Zenodo record 21064003](https://zenodo.org/records/21064003), then restore the archived folders and files at the repository root. `DATA_MANIFEST.csv` records the complete data inventory and `ZENODO_UPLOAD_MANIFEST.csv` identifies the archived release contents.
+Download the research archive from [Zenodo record 21064003](https://zenodo.org/records/21064003), then restore the archived folders and files at the repository root. The repository's `.gitignore` keeps these data and generated products outside version control. `DATA_MANIFEST.csv` records the inventory metadata and `ZENODO_UPLOAD_MANIFEST.csv` identifies the archived release contents.
 
 The workflow integrates Landsat surface reflectance, land-cover products, vegetation indices, nighttime lights, population density, protected areas, coastline information, and ecosystem-service coefficients.
 
@@ -151,7 +122,7 @@ earthengine authenticate
 
 Run scripts from the repository root after restoring the Zenodo data structure. The main sequence is:
 
-1. Generate annual mangrove products with `RF_opt.py` in Earth Engine.
+1. Generate annual mangrove products with `src/mapping/RF_opt.py` in Earth Engine.
 2. Build the analysis grid and extract environmental variables.
 3. Calculate MHI, temporal slopes, spatial statistics, and spatially varying models.
 4. Export global country statistics and integrate them with the local GBA analysis.
@@ -161,12 +132,12 @@ Run scripts from the repository root after restoring the Zenodo data structure. 
 Representative commands:
 
 ```bash
-python calculate_yearly_esv.py --output-dir .
-python calculate_transition_esv.py --output-dir .
-python plot_esv_time_series.py \
+python src/valuation/calculate_yearly_esv.py --output-dir .
+python src/valuation/calculate_transition_esv.py --output-dir .
+python src/visualization/plot_esv_time_series.py \
   --input yearly_class_area_esv.csv \
   --output mangrove_esv_time_series.png
-python plot_mangrove_service_composition.py \
+python src/visualization/plot_mangrove_service_composition.py \
   --input yearly_mangrove_esv_details.csv \
   --output mangrove_service_composition.png
 ```

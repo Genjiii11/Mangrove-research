@@ -6,7 +6,7 @@ from matplotlib.gridspec import GridSpec
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 REQUIRED_COLUMNS = {
     "year",
     "class_name",

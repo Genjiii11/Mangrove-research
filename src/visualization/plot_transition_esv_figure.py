@@ -7,7 +7,7 @@ import pandas as pd
 from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
 from matplotlib.gridspec import GridSpec
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 REQUIRED_COLUMNS = {
     "period",
     "from_class_id",

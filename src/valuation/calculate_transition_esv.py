@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 
 INPUT_FILES = {
     2000: ROOT / "LULC_convert_mangrove/CLCD_v01_2000_mangrove.tif",

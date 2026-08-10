@@ -10,8 +10,8 @@ Local processing for selected-country vs GBA mangrove protection analysis.
 
 前置条件
 --------
-先准备国家级原始统计 CSV：
-`D:/Desktop/Mangrove/Final/global_gba_pa_analysis_outputs/global_country_stats_2000_2020_raw.csv`
+Prepare the exported country statistics first:
+`global_gba_pa_analysis_outputs/global_country_stats_2000_2020_raw.csv`
 """
 
 from __future__ import annotations
@@ -35,8 +35,8 @@ from sklearn.preprocessing import StandardScaler
 # Configuration
 # =========================
 
-ROOT = Path(r"D:\Desktop\Mangrove")
-FINAL_DIR = ROOT / "Final"
+ROOT = Path(__file__).resolve().parents[2]
+FINAL_DIR = ROOT
 OUTPUT_DIR = FINAL_DIR / "global_gba_pa_analysis_outputs"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

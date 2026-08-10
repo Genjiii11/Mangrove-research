@@ -13,7 +13,7 @@ import rasterio
 from rasterio.windows import from_bounds as window_from_bounds
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 VI_DIR = ROOT / "VI"
 OUTPUT_DIR = ROOT / "Plot"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

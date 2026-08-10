@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
 import os
+from pathlib import Path
 
 # Configure matplotlib for publication-quality figures
 plt.rcParams.update({
@@ -27,7 +28,8 @@ plt.rcParams.update({
 })
 
 # Define file paths and years
-base_dir = r"d:\Desktop\Mangrove\Final\VI"
+ROOT = Path(__file__).resolve().parents[2]
+base_dir = ROOT / "VI"
 files = [
     ("mangrove_2000_90conf_indices.tif", 2000),
     ("mangrove_2005_90conf_indices.tif", 2005),
@@ -251,7 +253,7 @@ plt.tight_layout()
 plt.subplots_adjust(bottom=0.12)
 
 # Save figure
-output_path = r"d:\Desktop\Mangrove\Final\mangrove_combined_figure.png"
+output_path = ROOT / "mangrove_combined_figure.png"
 plt.savefig(output_path, dpi=300, facecolor='white', edgecolor='none')
 plt.close()
 

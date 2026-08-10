@@ -29,8 +29,8 @@ import ee
 # Configuration
 # =========================
 
-ROOT = Path(r"D:\Desktop\Mangrove")
-FINAL_DIR = ROOT / "Final"
+ROOT = Path(__file__).resolve().parents[2]
+FINAL_DIR = ROOT
 OUTPUT_DIR = FINAL_DIR / "global_gba_pa_analysis_outputs"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

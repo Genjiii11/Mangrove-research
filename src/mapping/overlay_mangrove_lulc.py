@@ -28,7 +28,7 @@ from rasterio.warp import (
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 
 VI_DIR = ROOT / "VI"
 LULC_DIR = ROOT / "LULC_convert"
